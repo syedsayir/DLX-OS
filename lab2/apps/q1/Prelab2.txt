@@ -1,0 +1,22 @@
+How many semaphores and locks are available in DLXOS, respectively?
+32 semaphores and 64 locks (including the ones the condition variables will be using).
+
+What are the system calls to create, acquire and release a lock?
+lock_create(), lock_acquire(lock_t lockid) and lock_release(lock_t lockid) respectively.
+
+How is a semaphore created in DLXOS?
+The user level program makes a system call - sem_create(int count), which will cause a trap to be handled by the OS. The OS will then call the appropriate trap handler SemCreate(int count), which in turn will disable the interrupts to make the process atomic. It will grab one of the availale semaphores, initialize it by calling SemInit and return the index of the semaphore.
+
+Explain how lock_acquire, lock_release, sem_signal and sem_wait work.
+lock_acquire
+The interupts are disabled first, and it is checked if the process already has the lock. If not, it gives the process the lock if it is available, otherwise it is put on the lock queue, putting the process to sleep, and finally enabling interupts.
+lock_release
+The interupts are disabled first, and it is checked if the process already has the lock. If not, it returns an error code otherwise the lock is given up and the first process in the lock queue is woken up and assigned the lock, if there is one waiting there. Finally the interupts are enabled.
+sem_signal
+The interupts are disabled first, and the counter is first incremented.Then it is checked if the counter>0, the first process from the semaphore waiting queue is woken up, if there is one. Finally the interupts are enabled.
+sem_wait
+The interupts are disabled first, and it is checked if the counter<=0, the process is put to sleep and added to the semaphore waiting queue. Else the counter is decremented and the process is allowed to continue. Finally the interupts are enabled.
+
+What is a handle and how is it used to access semaphores in DLXOS?
+It is a pointer to an object, and for semaphores we have a global array in the system containing all semaphores and the semaphore's handle will point to the address of that semaphore.
+

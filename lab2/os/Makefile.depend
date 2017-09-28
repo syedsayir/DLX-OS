@@ -1,0 +1,23 @@
+work/filesys.o: filesys.c ../include/os/ostraps.h ../include/os/dlxos.h \
+ ../include/misc.h ../include/os/process.h ../include/os/queue.h \
+ ../include/os/filesys.h
+work/memory.o: memory.c ../include/os/ostraps.h ../include/os/dlxos.h \
+ ../include/misc.h ../include/os/memory.h ../include/os/process.h \
+ ../include/os/queue.h
+work/misc.o: misc.c ../include/misc.h
+work/process.o: process.c ../include/os/ostraps.h ../include/os/dlxos.h \
+ ../include/misc.h ../include/os/process.h ../include/os/queue.h \
+ ../include/os/synch.h ../include/os/memory.h ../include/os/filesys.h \
+ ../include/os/share_memory.h
+work/queue.o: queue.c ../include/os/ostraps.h ../include/os/dlxos.h \
+ ../include/misc.h ../include/os/queue.h
+work/synch.o: synch.c ../include/os/ostraps.h ../include/os/dlxos.h \
+ ../include/misc.h ../include/os/process.h ../include/os/queue.h \
+ ../include/os/synch.h
+work/traps.o: traps.c ../include/os/ostraps.h ../include/os/dlx.h \
+ ../include/os/dlxos.h ../include/misc.h ../include/os/traps.h \
+ ../include/os/memory.h ../include/os/process.h ../include/os/queue.h \
+ ../include/os/synch.h ../include/os/share_memory.h
+work/sysproc.o: sysproc.c ../include/os/ostraps.h ../include/usertraps.h \
+ ../include/os/process.h ../include/os/dlxos.h ../include/misc.h \
+ ../include/os/queue.h ../include/os/synch.h
