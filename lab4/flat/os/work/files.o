@@ -1,0 +1,1989 @@
+; Compiled by GCC
+.text
+	.align 2
+.proc _isspace
+.global _isspace
+_isspace:
+;  Function 'isspace'; 0 bytes of locals, 3 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#24	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	lb	r2,3(r30)
+	addi	r1,r0,#0
+	andi	r3,r2,#0x00ff
+	seqi	r4,r3,#32
+	bnez	r4,L3
+	nop	; delay slot nop
+	andi	r3,r2,#0x00ff
+	seqi	r4,r3,#9
+	bnez	r4,L3
+	nop	; delay slot nop
+	andi	r3,r2,#0x00ff
+	seqi	r4,r3,#10
+	bnez	r4,L3
+	nop	; delay slot nop
+	j	L2
+	nop	; delay slot nop
+L3:
+	addi	r1,r0,#1
+L2:
+	j	L1
+	nop	; delay slot nop
+L1:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _isspace
+	.align 2
+.proc _isxdigit
+.global _isxdigit
+_isxdigit:
+;  Function 'isxdigit'; 0 bytes of locals, 3 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#24	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	lb	r2,3(r30)
+	addi	r1,r0,#0
+	andi	r3,r2,#0x00ff
+	sgtui	r4,r3,#47
+	beqz	r4,L7
+	nop	; delay slot nop
+	andi	r3,r2,#0x00ff
+	sleui	r4,r3,#57
+	bnez	r4,L6
+	nop	; delay slot nop
+	j	L7
+	nop	; delay slot nop
+L7:
+	andi	r3,r2,#0x00ff
+	sgtui	r4,r3,#96
+	beqz	r4,L8
+	nop	; delay slot nop
+	andi	r3,r2,#0x00ff
+	sleui	r4,r3,#102
+	bnez	r4,L6
+	nop	; delay slot nop
+	j	L8
+	nop	; delay slot nop
+L8:
+	andi	r3,r2,#0x00ff
+	sgtui	r4,r3,#64
+	beqz	r4,L5
+	nop	; delay slot nop
+	andi	r3,r2,#0x00ff
+	sleui	r4,r3,#65
+	bnez	r4,L6
+	nop	; delay slot nop
+	j	L5
+	nop	; delay slot nop
+L6:
+	addi	r1,r0,#1
+L5:
+	j	L4
+	nop	; delay slot nop
+L4:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _isxdigit
+	.align 2
+.proc _ceil
+.global _ceil
+_ceil:
+;  Function 'ceil'; 8 bytes of locals, 2 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#24	; alloc local storage
+	sw	0(r29),r2
+	sf	4(r29),f2
+	lf	f0,(r30)
+	cvtf2i	f2,f0
+	movfp2i	r1,f2
+
+	sw	-12(r30),r1
+	lw	r1,-12(r30)
+	movi2fp	f0,r1
+	cvti2f	f0,f0
+	lf	f1,(r30)
+	eqf	f1,f0
+	bfpf	L10
+	nop	; delay slot nop
+	lw	r1,-12(r30)
+	j	L9
+	nop	; delay slot nop
+L10:
+	lw	r1,-12(r30)
+	addi	r2,r1,#1
+	add	r1,r0,r2
+	j	L9
+	nop	; delay slot nop
+L9:
+	lw	r2,0(r29)
+	lf	f2,4(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _ceil
+	.align 2
+.proc _StrCmp
+.global _StrCmp
+_StrCmp:
+;  Function 'StrCmp'; 8 bytes of locals, 2 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#24	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	addi	r1,r0,#0
+	sw	-12(r30),r1
+L12:
+	lw	r1,(r30)
+	lw	r2,-12(r30)
+	add	r1,r1,r2
+	lw	r2,4(r30)
+	lw	r3,-12(r30)
+	add	r2,r2,r3
+	lbu	r1,(r1)
+	lbu	r2,(r2)
+	seq	r1,r1,r2
+	bnez	r1,L14
+	nop	; delay slot nop
+	j	L13
+	nop	; delay slot nop
+L14:
+	lw	r1,(r30)
+	lw	r2,-12(r30)
+	add	r1,r1,r2
+	lbu	r2,(r1)
+	snei	r1,r2,#0
+	bnez	r1,L15
+	nop	; delay slot nop
+	addi	r1,r0,#1
+	j	L11
+	nop	; delay slot nop
+L15:
+	lw	r2,-12(r30)
+	addi	r1,r2,#1
+	add	r2,r0,r1
+	sw	-12(r30),r2
+	j	L12
+	nop	; delay slot nop
+L13:
+	addi	r1,r0,#0
+	j	L11
+	nop	; delay slot nop
+L11:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _StrCmp
+	.align 2
+.proc _DisableIntrs
+.global _DisableIntrs
+_DisableIntrs:
+;  Function 'DisableIntrs'; 0 bytes of locals, 1 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#16	; alloc local storage
+	sw	0(r29),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	addi	r2,r0,#15
+	sw	(r1),r2
+	jal	_SetIntrs
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	add	r2,r0,r1
+	add	r1,r0,r2
+	j	L16
+	nop	; delay slot nop
+L16:
+	lw	r2,0(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _DisableIntrs
+	.align 2
+.proc _EnableIntrs
+.global _EnableIntrs
+_EnableIntrs:
+;  Function 'EnableIntrs'; 0 bytes of locals, 1 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#16	; alloc local storage
+	sw	0(r29),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	addi	r2,r0,#0
+	sw	(r1),r2
+	jal	_SetIntrs
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	add	r2,r0,r1
+	add	r1,r0,r2
+	j	L17
+	nop	; delay slot nop
+L17:
+	lw	r2,0(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _EnableIntrs
+	.align 2
+.proc _RestoreIntrs
+.global _RestoreIntrs
+_RestoreIntrs:
+;  Function 'RestoreIntrs'; 0 bytes of locals, 2 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#16	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	lw	r2,(r30)
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	sw	(r1),r2
+	jal	_SetIntrs
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	add	r3,r0,r1
+	add	r1,r0,r3
+	j	L18
+	nop	; delay slot nop
+L18:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _RestoreIntrs
+	.align 2
+.proc _FileModuleInit
+.global _FileModuleInit
+_FileModuleInit:
+;  Function 'FileModuleInit'; 8 bytes of locals, 3 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#32	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	add	r2,r0,r29
+	jal	_LockCreate
+	nop	; delay slot nop
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	sw	(r2),r1
+	addi	r1,r0,#0
+	sw	-12(r30),r1
+L20:
+	lw	r1,-12(r30)
+	slei	r2,r1,#14
+	bnez	r2,L23
+	nop	; delay slot nop
+	j	L21
+	nop	; delay slot nop
+L23:
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-12(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#-1
+	sw	96(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-12(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#-1
+	sw	92(r1),r2
+L22:
+	lw	r2,-12(r30)
+	addi	r1,r2,#1
+	add	r2,r0,r1
+	sw	-12(r30),r2
+	j	L20
+	nop	; delay slot nop
+L21:
+L19:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileModuleInit
+.data
+	.align 2
+LC0:
+	.ascii "r\000"
+	.align 2
+LC1:
+	.ascii "w\000"
+	.align 2
+LC2:
+	.ascii "rw\000"
+	.align 2
+LC3:
+	.ascii "ERROR: Need to open file as r/w/rw not as %s.\n\000"
+	.align 2
+LC4:
+	.ascii "FATAL: Unknown error occured\n\000"
+	.align 2
+LC5:
+	.ascii "You already Opened this file..\n\000"
+	.align 2
+LC6:
+	.ascii "ERROR: FAILED. Pid: %d already has this open.\n\000"
+	.align 2
+LC7:
+	.ascii "FATAL: Out of File Descriptor Structures.\n\000"
+	.align 2
+LC8:
+	.ascii "Filename Doesn\'t Exist. Trying to create file.\n\000"
+	.align 2
+LC9:
+	.ascii "FATAL: Failed to create file.\n\000"
+.text
+	.align 2
+.proc _FileOpen
+.global _FileOpen
+_FileOpen:
+;  Function 'FileOpen'; 16 bytes of locals, 4 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#40	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	sw	12(r29),r5
+	addi	r1,r0,#-1
+	sw	-12(r30),r1
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,4(r30)
+	sw	(r1),r2
+	lhi	r2,((LC0)>>16)&0xffff
+	addui	r2,r2,(LC0)&0xffff
+	sw	4(r1),r2
+	jal	_StrCmp
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#0
+	beqz	r2,L25
+	nop	; delay slot nop
+	addi	r1,r0,#1
+	sw	-12(r30),r1
+L25:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,4(r30)
+	sw	(r1),r2
+	lhi	r2,((LC1)>>16)&0xffff
+	addui	r2,r2,(LC1)&0xffff
+	sw	4(r1),r2
+	jal	_StrCmp
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#0
+	beqz	r2,L26
+	nop	; delay slot nop
+	addi	r1,r0,#2
+	sw	-12(r30),r1
+L26:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,4(r30)
+	sw	(r1),r2
+	lhi	r2,((LC2)>>16)&0xffff
+	addui	r2,r2,(LC2)&0xffff
+	sw	4(r1),r2
+	jal	_StrCmp
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#0
+	beqz	r2,L27
+	nop	; delay slot nop
+	addi	r1,r0,#3
+	sw	-12(r30),r1
+L27:
+	lw	r1,-12(r30)
+	seqi	r2,r1,#-1
+	beqz	r2,L28
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC3)>>16)&0xffff
+	addui	r2,r2,(LC3)&0xffff
+	sw	(r1),r2
+	lw	r2,4(r30)
+	sw	4(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L28:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleAcquire
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	add	r2,r0,r29
+	jal	_GetCurrentPid
+	nop	; delay slot nop
+	sw	-24(r30),r1
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	jal	_DfsInodeFilenameExists
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	sw	-20(r30),r1
+	lw	r1,-20(r30)
+	snei	r2,r1,#-1
+	beqz	r2,L29
+	nop	; delay slot nop
+	addi	r1,r0,#0
+	sw	-16(r30),r1
+L30:
+	lw	r1,-16(r30)
+	slei	r2,r1,#14
+	bnez	r2,L33
+	nop	; delay slot nop
+	j	L31
+	nop	; delay slot nop
+L33:
+	lw	r1,-16(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,96(r2)
+	seqi	r2,r1,#1
+	beqz	r2,L32
+	nop	; delay slot nop
+	lw	r1,-16(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,76(r2)
+	lw	r2,-20(r30)
+	seq	r1,r1,r2
+	beqz	r1,L32
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r3,((_fds)>>16)&0xffff
+	addui	r3,r3,(_fds)&0xffff
+	add	r2,r3,r2
+	sw	4(r1),r2
+	jal	_StrCmp
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	snei	r2,r1,#0
+	bnez	r2,L35
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC4)>>16)&0xffff
+	addui	r2,r2,(LC4)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L35:
+	lw	r1,-16(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,92(r2)
+	lw	r2,-24(r30)
+	seq	r1,r1,r2
+	beqz	r1,L36
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC5)>>16)&0xffff
+	addui	r2,r2,(LC5)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lw	r1,-16(r30)
+	j	L24
+	nop	; delay slot nop
+	j	L37
+	nop	; delay slot nop
+L36:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC6)>>16)&0xffff
+	addui	r2,r2,(LC6)&0xffff
+	sw	(r1),r2
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,92(r3)
+	sw	4(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L37:
+L34:
+L32:
+	lw	r2,-16(r30)
+	addi	r1,r2,#1
+	add	r2,r0,r1
+	sw	-16(r30),r2
+	j	L30
+	nop	; delay slot nop
+L31:
+	lw	r1,-12(r30)
+	snei	r2,r1,#1
+	beqz	r2,L38
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,-20(r30)
+	sw	(r1),r2
+	jal	_DfsInodeDelete
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	jal	_DfsInodeOpen
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	sw	-20(r30),r1
+L38:
+	nop
+	addi	r1,r0,#0
+	sw	-16(r30),r1
+L39:
+	lw	r1,-16(r30)
+	slei	r2,r1,#14
+	bnez	r2,L42
+	nop	; delay slot nop
+	j	L40
+	nop	; delay slot nop
+L42:
+	lw	r1,-16(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,96(r2)
+	seqi	r2,r1,#-1
+	beqz	r2,L41
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r3,((_fds)>>16)&0xffff
+	addui	r3,r3,(_fds)&0xffff
+	add	r2,r3,r2
+	sw	(r1),r2
+	lw	r2,(r30)
+	sw	4(r1),r2
+	jal	_dstrcpy
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-20(r30)
+	sw	76(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	80(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	84(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-12(r30)
+	sw	88(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-24(r30)
+	sw	92(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#1
+	sw	96(r1),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lw	r1,-16(r30)
+	j	L24
+	nop	; delay slot nop
+L43:
+L41:
+	lw	r2,-16(r30)
+	addi	r1,r2,#1
+	add	r2,r0,r1
+	sw	-16(r30),r2
+	j	L39
+	nop	; delay slot nop
+L40:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC7)>>16)&0xffff
+	addui	r2,r2,(LC7)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L29:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC8)>>16)&0xffff
+	addui	r2,r2,(LC8)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	jal	_DfsInodeOpen
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	sw	-20(r30),r1
+	lw	r1,-20(r30)
+	seqi	r2,r1,#-1
+	beqz	r2,L44
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC9)>>16)&0xffff
+	addui	r2,r2,(LC9)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L44:
+	nop
+	addi	r1,r0,#0
+	sw	-16(r30),r1
+L45:
+	lw	r1,-16(r30)
+	slei	r2,r1,#14
+	bnez	r2,L48
+	nop	; delay slot nop
+	j	L46
+	nop	; delay slot nop
+L48:
+	lw	r1,-16(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,96(r2)
+	seqi	r2,r1,#-1
+	beqz	r2,L47
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r3,((_fds)>>16)&0xffff
+	addui	r3,r3,(_fds)&0xffff
+	add	r2,r3,r2
+	sw	(r1),r2
+	lw	r2,(r30)
+	sw	4(r1),r2
+	jal	_dstrcpy
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-20(r30)
+	sw	76(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	80(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	84(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-12(r30)
+	sw	88(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-24(r30)
+	sw	92(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,-16(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#1
+	sw	96(r1),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lw	r1,-16(r30)
+	j	L24
+	nop	; delay slot nop
+L49:
+L47:
+	lw	r2,-16(r30)
+	addi	r1,r2,#1
+	add	r2,r0,r1
+	sw	-16(r30),r2
+	j	L45
+	nop	; delay slot nop
+L46:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC7)>>16)&0xffff
+	addui	r2,r2,(LC7)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((_fileLock)>>16)&0xffff
+	addui	r2,r2,(_fileLock)&0xffff
+	lw	r3,(r2)
+	sw	(r1),r3
+	jal	_LockHandleRelease
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L24
+	nop	; delay slot nop
+L24:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r5,12(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileOpen
+.data
+	.align 2
+LC10:
+	.ascii "ERROR: Trying to close invalid file descriptor.\n\000"
+	.align 2
+LC11:
+	.ascii "ERROR: You dont have the file open!\n\000"
+.text
+	.align 2
+.proc _FileClose
+.global _FileClose
+_FileClose:
+;  Function 'FileClose'; 0 bytes of locals, 4 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#24	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	sw	12(r29),r5
+	lw	r1,(r30)
+	slti	r2,r1,#0
+	bnez	r2,L52
+	nop	; delay slot nop
+	lw	r1,(r30)
+	sgti	r2,r1,#14
+	bnez	r2,L52
+	nop	; delay slot nop
+	j	L51
+	nop	; delay slot nop
+L52:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC10)>>16)&0xffff
+	addui	r2,r2,(LC10)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L50
+	nop	; delay slot nop
+L51:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	add	r3,r0,r29
+	jal	_GetCurrentPid
+	nop	; delay slot nop
+	lw	r2,92(r2)
+	sne	r1,r2,r1
+	beqz	r1,L53
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC11)>>16)&0xffff
+	addui	r2,r2,(LC11)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L50
+	nop	; delay slot nop
+L53:
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#-1
+	sw	96(r1),r2
+	addi	r1,r0,#1
+	j	L50
+	nop	; delay slot nop
+L50:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r5,12(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileClose
+.data
+	.align 2
+LC12:
+	.ascii "ERROR: Invalid file descriptor passed.\n\000"
+	.align 2
+LC13:
+	.ascii "ERROR: You dont have read permission!\n\000"
+	.align 2
+LC14:
+	.ascii "ERROR: Can\'t read more than 4Kbytes!\n\000"
+	.align 2
+LC15:
+	.ascii "ERROR: %d!\n\000"
+	.align 2
+LC16:
+	.ascii "ERROR: Can\'t read. EndOfFile reached!\n\000"
+	.align 2
+LC17:
+	.ascii "Error: Couldn\'t read from Inode!\n\000"
+	.align 2
+LC18:
+	.ascii "Error: Reached End of the file.\n\000"
+.text
+	.align 2
+.proc _FileRead
+.global _FileRead
+_FileRead:
+;  Function 'FileRead'; 16 bytes of locals, 4 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#40	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	sw	12(r29),r5
+	lw	r1,(r30)
+	slti	r2,r1,#0
+	bnez	r2,L56
+	nop	; delay slot nop
+	lw	r1,(r30)
+	sgti	r2,r1,#14
+	bnez	r2,L56
+	nop	; delay slot nop
+	j	L55
+	nop	; delay slot nop
+L56:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC12)>>16)&0xffff
+	addui	r2,r2,(LC12)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L55:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	add	r3,r0,r29
+	jal	_GetCurrentPid
+	nop	; delay slot nop
+	lw	r2,92(r2)
+	sne	r1,r2,r1
+	beqz	r1,L57
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC11)>>16)&0xffff
+	addui	r2,r2,(LC11)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L57:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,88(r2)
+	seqi	r2,r1,#2
+	beqz	r2,L58
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC13)>>16)&0xffff
+	addui	r2,r2,(LC13)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L58:
+	lw	r1,8(r30)
+	sgti	r2,r1,#4096
+	beqz	r2,L59
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC14)>>16)&0xffff
+	addui	r2,r2,(LC14)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L59:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,76(r3)
+	sw	(r1),r2
+	jal	_DfsInodeFilesize
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	sw	-12(r30),r1
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC15)>>16)&0xffff
+	addui	r2,r2,(LC15)&0xffff
+	sw	(r1),r2
+	lw	r2,-12(r30)
+	sw	4(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC15)>>16)&0xffff
+	addui	r2,r2,(LC15)&0xffff
+	sw	(r1),r2
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,80(r3)
+	sw	4(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,80(r2)
+	lw	r2,-12(r30)
+	seq	r1,r1,r2
+	beqz	r1,L60
+	nop	; delay slot nop
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#1
+	sw	84(r1),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC16)>>16)&0xffff
+	addui	r2,r2,(LC16)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L60:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,80(r2)
+	sw	-16(r30),r1
+	addi	r29,r29,#-16
+	add	r1,r0,r29
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,76(r3)
+	sw	(r1),r2
+	lw	r2,4(r30)
+	sw	4(r1),r2
+	lw	r2,-16(r30)
+	sw	8(r1),r2
+	lw	r2,8(r30)
+	sw	12(r1),r2
+	jal	_DfsInodeReadBytes
+	nop	; delay slot nop
+	addi	r29,r29,#16
+	sw	-20(r30),r1
+	lw	r1,-20(r30)
+	seqi	r2,r1,#-1
+	beqz	r2,L61
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC17)>>16)&0xffff
+	addui	r2,r2,(LC17)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L54
+	nop	; delay slot nop
+L61:
+	lw	r1,-16(r30)
+	lw	r2,-20(r30)
+	add	r1,r1,r2
+	sw	-16(r30),r1
+	lw	r1,-16(r30)
+	lw	r2,-12(r30)
+	seq	r1,r1,r2
+	beqz	r1,L62
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC18)>>16)&0xffff
+	addui	r2,r2,(LC18)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#1
+	sw	84(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-12(r30)
+	sw	80(r1),r2
+L62:
+	lw	r1,-20(r30)
+	j	L54
+	nop	; delay slot nop
+L54:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r5,12(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileRead
+.data
+	.align 2
+LC19:
+	.ascii "ERROR: Incorrect from_where passed!\n\000"
+	.align 2
+LC20:
+	.ascii "ERROR: Attempting to seek beyond Beginning of File!\n\000"
+	.align 2
+LC21:
+	.ascii "ERROR: Attempting to seek beyond End of File!\n\000"
+.text
+	.align 2
+.proc _FileSeek
+.global _FileSeek
+_FileSeek:
+;  Function 'FileSeek'; 8 bytes of locals, 4 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#32	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	sw	12(r29),r5
+	lw	r1,(r30)
+	slti	r2,r1,#0
+	bnez	r2,L65
+	nop	; delay slot nop
+	lw	r1,(r30)
+	sgti	r2,r1,#14
+	bnez	r2,L65
+	nop	; delay slot nop
+	j	L64
+	nop	; delay slot nop
+L65:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC12)>>16)&0xffff
+	addui	r2,r2,(LC12)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L63
+	nop	; delay slot nop
+L64:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	add	r3,r0,r29
+	jal	_GetCurrentPid
+	nop	; delay slot nop
+	lw	r2,92(r2)
+	sne	r1,r2,r1
+	beqz	r1,L66
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC11)>>16)&0xffff
+	addui	r2,r2,(LC11)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L63
+	nop	; delay slot nop
+L66:
+	lw	r1,8(r30)
+	snei	r2,r1,#1
+	beqz	r2,L67
+	nop	; delay slot nop
+	lw	r1,8(r30)
+	snei	r2,r1,#2
+	beqz	r2,L67
+	nop	; delay slot nop
+	lw	r1,8(r30)
+	snei	r2,r1,#3
+	beqz	r2,L67
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC19)>>16)&0xffff
+	addui	r2,r2,(LC19)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L63
+	nop	; delay slot nop
+L67:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,76(r3)
+	sw	(r1),r2
+	jal	_DfsInodeFilesize
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	sw	-12(r30),r1
+	lw	r1,8(r30)
+	seqi	r2,r1,#2
+	beqz	r2,L68
+	nop	; delay slot nop
+	lw	r1,-12(r30)
+	lw	r2,4(r30)
+	sub	r1,r1,r2
+	sw	-16(r30),r1
+	j	L69
+	nop	; delay slot nop
+L68:
+	lw	r1,8(r30)
+	seqi	r2,r1,#1
+	beqz	r2,L70
+	nop	; delay slot nop
+	lw	r1,4(r30)
+	sw	-16(r30),r1
+	j	L69
+	nop	; delay slot nop
+L70:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,80(r2)
+	lw	r2,4(r30)
+	add	r1,r1,r2
+	sw	-16(r30),r1
+L71:
+L69:
+	lw	r1,-16(r30)
+	slti	r2,r1,#0
+	beqz	r2,L72
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC20)>>16)&0xffff
+	addui	r2,r2,(LC20)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	80(r1),r2
+	addi	r1,r0,#-1
+	j	L63
+	nop	; delay slot nop
+L72:
+	lw	r1,-16(r30)
+	lw	r2,-12(r30)
+	sge	r1,r1,r2
+	beqz	r1,L73
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC21)>>16)&0xffff
+	addui	r2,r2,(LC21)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-12(r30)
+	sw	80(r1),r2
+	addi	r1,r0,#-1
+	j	L63
+	nop	; delay slot nop
+L73:
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	lw	r2,-16(r30)
+	sw	80(r1),r2
+	lhi	r1,((_fds)>>16)&0xffff
+	addui	r1,r1,(_fds)&0xffff
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	add	r1,r1,r2
+	addi	r2,r0,#0
+	sw	84(r1),r2
+	addi	r1,r0,#1
+	j	L63
+	nop	; delay slot nop
+L63:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r5,12(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileSeek
+.data
+	.align 2
+LC22:
+	.ascii "ERROR: You dont have write permission!\n\000"
+	.align 2
+LC23:
+	.ascii "ERROR: Can\'t write more than 4Kbytes!\n\000"
+	.align 2
+LC24:
+	.ascii "Error: Couldn\'t write to Inode!\n\000"
+.text
+	.align 2
+.proc _FileWrite
+.global _FileWrite
+_FileWrite:
+;  Function 'FileWrite'; 8 bytes of locals, 4 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#32	; alloc local storage
+	sw	0(r29),r2
+	sw	4(r29),r3
+	sw	8(r29),r4
+	sw	12(r29),r5
+	lw	r1,(r30)
+	slti	r2,r1,#0
+	bnez	r2,L76
+	nop	; delay slot nop
+	lw	r1,(r30)
+	sgti	r2,r1,#14
+	bnez	r2,L76
+	nop	; delay slot nop
+	j	L75
+	nop	; delay slot nop
+L76:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC12)>>16)&0xffff
+	addui	r2,r2,(LC12)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L74
+	nop	; delay slot nop
+L75:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	add	r3,r0,r29
+	jal	_GetCurrentPid
+	nop	; delay slot nop
+	lw	r2,92(r2)
+	sne	r1,r2,r1
+	beqz	r1,L77
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC11)>>16)&0xffff
+	addui	r2,r2,(LC11)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L74
+	nop	; delay slot nop
+L77:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,88(r2)
+	seqi	r2,r1,#1
+	beqz	r2,L78
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC22)>>16)&0xffff
+	addui	r2,r2,(LC22)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L74
+	nop	; delay slot nop
+L78:
+	lw	r1,8(r30)
+	sgti	r2,r1,#4096
+	beqz	r2,L79
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC23)>>16)&0xffff
+	addui	r2,r2,(LC23)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L74
+	nop	; delay slot nop
+L79:
+	lw	r1,(r30)
+	add	r3,r0,r1
+	slli	r2,r3,#0x1
+	add	r2,r2,r1
+	slli	r3,r2,#0x3
+	add	r3,r3,r1
+	slli	r1,r3,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r2,r1,r5
+	lw	r1,80(r2)
+	sw	-12(r30),r1
+	addi	r29,r29,#-16
+	add	r1,r0,r29
+	lw	r2,(r30)
+	add	r4,r0,r2
+	slli	r3,r4,#0x1
+	add	r3,r3,r2
+	slli	r4,r3,#0x3
+	add	r4,r4,r2
+	slli	r2,r4,#0x2
+	lhi	r5,((_fds)>>16)&0xffff
+	addui	r5,r5,(_fds)&0xffff
+	add	r3,r2,r5
+	lw	r2,76(r3)
+	sw	(r1),r2
+	lw	r2,4(r30)
+	sw	4(r1),r2
+	lw	r2,-12(r30)
+	sw	8(r1),r2
+	lw	r2,8(r30)
+	sw	12(r1),r2
+	jal	_DfsInodeWriteBytes
+	nop	; delay slot nop
+	addi	r29,r29,#16
+	sw	-16(r30),r1
+	lw	r1,-16(r30)
+	seqi	r2,r1,#-1
+	beqz	r2,L80
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC24)>>16)&0xffff
+	addui	r2,r2,(LC24)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L74
+	nop	; delay slot nop
+L80:
+	lw	r1,-12(r30)
+	lw	r2,-16(r30)
+	add	r1,r1,r2
+	sw	-12(r30),r1
+	lw	r1,-16(r30)
+	j	L74
+	nop	; delay slot nop
+L74:
+	lw	r2,0(r29)
+	lw	r3,4(r29)
+	lw	r4,8(r29)
+	lw	r5,12(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileWrite
+.data
+	.align 2
+LC25:
+	.ascii "Error: Filename doesn\'t exist!\n\000"
+	.align 2
+LC26:
+	.ascii "Deleting file...\n\000"
+.text
+	.align 2
+.proc _FileDelete
+.global _FileDelete
+_FileDelete:
+;  Function 'FileDelete'; 0 bytes of locals, 1 regs to save.
+	sw	-4(r29),r30	; push fp
+	add	r30,r0,r29	; fp = sp
+	sw	-8(r29),r31	; push ret addr
+	subui	r29,r29,#16	; alloc local storage
+	sw	0(r29),r2
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	jal	_DfsInodeFilenameExists
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	seqi	r2,r1,#-1
+	beqz	r2,L82
+	nop	; delay slot nop
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC25)>>16)&0xffff
+	addui	r2,r2,(LC25)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#-1
+	j	L81
+	nop	; delay slot nop
+L82:
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lhi	r2,((LC26)>>16)&0xffff
+	addui	r2,r2,(LC26)&0xffff
+	sw	(r1),r2
+	jal	_printf
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r1,r0,r29
+	lw	r2,(r30)
+	sw	(r1),r2
+	jal	_DfsInodeOpen
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r29,r29,#-8
+	add	r2,r0,r29
+	sw	(r2),r1
+	jal	_DfsInodeDelete
+	nop	; delay slot nop
+	addi	r29,r29,#8
+	addi	r1,r0,#1
+	j	L81
+	nop	; delay slot nop
+L81:
+	lw	r2,0(r29)
+	lw	r31,-8(r30)
+	add	r29,r0,r30
+	lw	r30,-4(r30)
+	jr	r31
+	nop
+.endproc _FileDelete
+.data
+	.align 2
+.global	_fileLock
+_fileLock:
+	.space 4
+	.align 2
+_fds:
+	.space 1500
